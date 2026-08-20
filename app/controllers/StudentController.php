@@ -5,7 +5,6 @@
     {
         public function index()
         {
-            session_start();
 
             $_SESSION['student_access'] = true;
 
@@ -23,7 +22,6 @@
 
         public function profile()
         {
-            session_start();
 
             $data = [
                 'student_id' => '2026-0001',
