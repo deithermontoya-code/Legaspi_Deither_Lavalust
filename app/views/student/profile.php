@@ -7,141 +7,199 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Public+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap');
+
+        :root{
+            --kraft:#C7A574;
+            --kraft-dark:#9C7B4C;
+            --kraft-darker:#7C6039;
+            --card:#F1EAD6;
+            --ink:#2B2A25;
+            --ink-soft:#6B6250;
+            --stamp:#A63D2F;
+            --forest:#2F4A3C;
+        }
+        body{ font-family:'Public Sans', sans-serif; background:var(--kraft-darker); color:var(--ink); }
+        .font-type{ font-family:'Special Elite', monospace; }
+        .font-mono{ font-family:'Courier Prime', monospace; }
+
+        .cork-texture{
+            background-color: var(--kraft);
+            background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 14px 14px;
+        }
+
+        .tab-btn{
+            position:relative;
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+        }
+
+        .dossier{
+            background: var(--card);
+            border: 1px solid rgba(43,42,37,0.15);
+            box-shadow: 0 18px 40px -20px rgba(0,0,0,0.5), 0 2px 0 rgba(255,255,255,0.4) inset;
+        }
+
+        .stamp{
+            transform: rotate(-9deg);
+            border: 3px solid var(--stamp);
+            color: var(--stamp);
+            border-radius: 6px;
+            mix-blend-mode: multiply;
+            opacity: 0.85;
+        }
+
+        .paperclip{
+            position:absolute;
+            top:-20px;
+            left:50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width:30px;
+            height:56px;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
+        }
+
+        .stitch{ border-top: 2px dashed rgba(43,42,37,0.25); }
+        .stitch-b{ border-bottom: 2px dashed rgba(43,42,37,0.25); }
+
+        .tab-label::before{
+            content:"";
+            position:absolute;
+            left:0; top:0; bottom:0;
+            width:3px;
+            background: var(--stamp);
+        }
     </style>
 </head>
-<body class="bg-[#F8F9FB] flex h-screen overflow-hidden text-gray-800">
+<body class="h-screen overflow-hidden flex flex-col">
 
-    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col h-full flex-shrink-0">
-        <div class="h-20 flex items-center px-6 border-b border-gray-100">
-            <div class="bg-gray-900 text-white rounded-md p-2 mr-3 flex items-center justify-center">
-                <i class="fa-solid fa-graduation-cap text-lg"></i>
-            </div>
-            <div>
-                <h1 class="font-semibold text-gray-900 text-lg leading-tight">LavaLust</h1>
-                <p class="text-sm text-gray-500 leading-tight">JhonasGwapo</p>
-            </div>
-        </div>
-
-        <nav class="flex-1 overflow-y-auto py-6 px-4">
-            <div class="mb-6">
-                <p class="text-xs font-semibold text-gray-400 mb-3 px-3 tracking-wider">MAIN MENU</p>
-                <a href="<?= site_url('student'); ?>" class="flex items-center px-3 py-2.5 bg-gray-100 text-gray-900 rounded-lg mb-1 font-medium text-sm">
-                    <i class="fa-solid fa-user-group w-5 mr-2"></i> Students
-                </a>
-                <a href="#" class="flex items-center px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg mb-1 font-medium text-sm">
-                    <i class="fa-solid fa-user-plus w-5 mr-2"></i> Add Student
-                </a>
-            </div>
-
-            <div>
-                <p class="text-xs font-semibold text-gray-400 mb-3 px-3 tracking-wider">TOOLS</p>
-                <a href="#" class="flex items-center px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg mb-1 font-medium text-sm">
-                    <i class="fa-solid fa-chart-bar w-5 mr-2"></i> Reports
-                </a>
-                <a href="#" class="flex items-center px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg mb-1 font-medium text-sm">
-                    <i class="fa-solid fa-file-lines w-5 mr-2"></i> Transcripts
-                </a>
-                <a href="#" class="flex items-center px-3 py-2.5 text-gray-600 hover:bg-gray-50 rounded-lg mb-1 font-medium text-sm">
-                    <i class="fa-solid fa-gear w-5 mr-2"></i> Settings
-                </a>
-            </div>
-        </nav>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-full overflow-hidden">
-        
-        <header class="bg-white border-b border-gray-200 px-8 py-6 flex justify-between items-center flex-shrink-0">
-            <div>
-                <h2 class="text-2xl font-semibold text-gray-900">Student Profile</h2>
-                <p class="text-gray-500 text-sm mt-1">Student Profile Overview</p>
-            </div>
-            <a href="<?= site_url('student'); ?>" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center transition-colors shadow-sm">
-                <i class="fa-solid fa-arrow-left mr-2"></i> Home
-            </a>
-        </header>
-
-        <div class="flex-1 overflow-y-auto p-8">
-            <div class="max-w-5xl mx-auto bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                
-                <div class="p-8 border-b border-gray-100 flex items-center gap-6 bg-gray-50">
-                    <div class="w-24 h-24 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-400 shadow-sm">
-                        <i class="fa-regular fa-user text-4xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-3xl font-bold text-gray-900"><?= $name; ?></h3>
-                        <p class="text-gray-600 mt-1 font-medium"><?= $course; ?></p>
-                        <div class="flex items-center gap-3 mt-3">
-                            <span class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">Active</span>
-                            <span class="text-sm text-gray-500"><i class="fa-regular fa-id-badge mr-1"></i> <?= $student_id; ?></span>
-                        </div>
-                    </div>
+    <!-- Top folder-tab navigation -->
+    <header class="flex-shrink-0 pt-5 px-8 cork-texture">
+        <div class="flex items-end justify-between">
+            <div class="flex items-end gap-1">
+                <div class="tab-btn font-type text-sm px-6 pt-3 pb-3" style="background:var(--forest); color:var(--card);">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i>LavaLust Registry
                 </div>
+                <a href="<?= site_url('student'); ?>" class="tab-btn font-type text-sm px-6 pt-3 pb-4 -mb-px" style="background:var(--card); color:var(--ink);">
+                    Students
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all" style="background:rgba(241,234,214,0.55); color:var(--ink-soft);">
+                    Add Student
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden md:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Reports
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden lg:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Transcripts
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden lg:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Settings
+                </a>
+            </div>
 
-                <div class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    
-                    <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Academic Information</h4>
-                        <ul class="space-y-4 text-sm">
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Student ID</span>
-                                <span class="font-semibold text-gray-900"><?= $student_id; ?></span>
-                            </li>
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Year Level</span>
-                                <span class="font-semibold text-gray-900"><?= $year; ?></span>
-                            </li>
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Course</span>
-                                <span class="font-semibold text-gray-900"><?= $course; ?></span>
-                            </li>
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Section</span>
-                                <span class="font-semibold text-gray-900"><?= $section; ?></span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-100 pb-2">Contact Information</h4>
-                        <ul class="space-y-4 text-sm">
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Email</span>
-                                <span class="font-semibold text-gray-900"><?= $email; ?></span>
-                            </li>
-                            <li class="flex justify-between items-center p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium">Contact Number</span>
-                                <span class="font-semibold text-gray-900"><?= $contact_number; ?></span>
-                            </li>
-                            <li class="flex justify-between items-start p-2 hover:bg-gray-50 rounded-md transition-colors">
-                                <span class="text-gray-500 font-medium mt-0.5">Address</span>
-                                <span class="font-semibold text-gray-900 text-right max-w-[200px]"><?= $address; ?></span>
-                            </li>
-                        </ul>
-                    </div>
+            <a href="<?= site_url('student'); ?>" class="mb-3 font-semibold text-sm px-5 py-2.5 rounded-sm flex items-center gap-2 text-white" style="background:var(--forest);">
+                <i class="fa-solid fa-arrow-left text-xs"></i> Back to Student Dashboard
+            </a>
+        </div>
+    </header>
+    <main class="flex-1 overflow-y-auto cork-texture px-8 pb-10">
+        <div class="rounded-b-sm rounded-tr-sm p-8 min-h-full" style="background:var(--card); box-shadow:0 -2px 0 rgba(0,0,0,0.08) inset;">
 
-                    <div class="lg:col-span-2 mt-4 pt-6 border-t border-gray-100">
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Additional Details</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-                            <div class="bg-blue-50/50 p-5 rounded-lg border border-blue-100">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <i class="fa-solid fa-laptop-code text-blue-500"></i>
-                                    <span class="block font-bold text-blue-900">Skills</span>
-                                </div>
-                                <span class="font-medium text-gray-700 leading-relaxed"><?= $skills; ?></span>
-                            </div>
-                            
-                            <div class="bg-purple-50/50 p-5 rounded-lg border border-purple-100">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <i class="fa-solid fa-gamepad text-purple-500"></i>
-                                    <span class="block font-bold text-purple-900">Hobbies</span>
-                                </div>
-                                <span class="font-medium text-gray-700 leading-relaxed"><?= $hobbies; ?></span>
-                            </div>
+            <p class="font-mono text-xs tracking-widest uppercase pt-6" style="color:var(--stamp);">Registrar's File &bull; Complete Record</p>
+            <h2 class="font-type text-2xl mt-1 mb-8" style="color:var(--ink);">Student Profile</h2>
+
+            <div class="max-w-4xl mx-auto relative">
+
+                <svg class="paperclip" viewBox="0 0 34 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14V46C9 54.2843 15.7157 61 24 61C32.2843 61 39 54.2843 39 46V10C39 4.47715 34.5228 0 29 0C23.4772 0 19 4.47715 19 10V44C19 46.7614 21.2386 49 24 49C26.7614 49 29 46.7614 29 44V16"
+                          stroke="#8A8A8A" stroke-width="4" stroke-linecap="round" transform="translate(-6,0)"/>
+                    <path d="M9 14V46C9 54.2843 15.7157 61 24 61C32.2843 61 39 54.2843 39 46V10C39 4.47715 34.5228 0 29 0C23.4772 0 19 4.47715 19 10V44C19 46.7614 21.2386 49 24 49C26.7614 49 29 46.7614 29 44V16"
+                          stroke="#D6D6D6" stroke-width="2" stroke-linecap="round" transform="translate(-6,0)"/>
+                </svg>
+
+                <div class="dossier rounded-sm overflow-hidden">
+                    <div class="p-8 pt-10 flex items-center gap-6 stitch-b">
+                        <div class="w-24 h-24 rounded-full flex items-center justify-center flex-shrink-0" style="background:var(--forest);">
+                            <i class="fa-regular fa-user text-4xl" style="color:var(--card);"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-mono text-[11px] uppercase tracking-[0.2em]" style="color:var(--stamp);">Student ID <?= $student_id; ?></p>
+                            <h3 class="font-type text-3xl mt-1" style="color:var(--ink);"><?= $name; ?></h3>
+                            <p class="font-mono text-sm mt-1" style="color:var(--ink-soft);"><?= $course; ?></p>
+                        </div>
+                        <div class="stamp font-type text-xs px-3 py-1 uppercase whitespace-nowrap">
+                            Active
                         </div>
                     </div>
 
+                    <div class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                        <div>
+                            <h4 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-4 pl-3 tab-label relative" style="color:var(--ink-soft);">Academic Information</h4>
+                            <ul class="space-y-3 font-mono text-sm">
+                                <li class="flex justify-between items-center py-2 stitch-b">
+                                    <span style="color:var(--ink-soft);">Student ID</span>
+                                    <span class="font-bold" style="color:var(--ink);"><?= $student_id; ?></span>
+                                </li>
+                                <li class="flex justify-between items-center py-2 stitch-b">
+                                    <span style="color:var(--ink-soft);">Year Level</span>
+                                    <span class="font-bold" style="color:var(--ink);"><?= $year; ?></span>
+                                </li>
+                                <li class="flex justify-between items-center py-2 stitch-b">
+                                    <span style="color:var(--ink-soft);">Course</span>
+                                    <span class="font-bold" style="color:var(--ink);"><?= $course; ?></span>
+                                </li>
+                                <li class="flex justify-between items-center py-2">
+                                    <span style="color:var(--ink-soft);">Section</span>
+                                    <span class="font-bold" style="color:var(--ink);"><?= $section; ?></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-4 pl-3 tab-label relative" style="color:var(--ink-soft);">Contact Information</h4>
+                            <ul class="space-y-3 font-mono text-sm">
+                                <li class="flex justify-between items-center py-2 stitch-b">
+                                    <span style="color:var(--ink-soft);">Email</span>
+                                    <span class="font-bold text-right" style="color:var(--ink);"><?= $email; ?></span>
+                                </li>
+                                <li class="flex justify-between items-center py-2 stitch-b">
+                                    <span style="color:var(--ink-soft);">Contact Number</span>
+                                    <span class="font-bold" style="color:var(--ink);"><?= $contact_number; ?></span>
+                                </li>
+                                <li class="flex justify-between items-start py-2">
+                                    <span style="color:var(--ink-soft);">Address</span>
+                                    <span class="font-bold text-right max-w-[220px]" style="color:var(--ink);"><?= $address; ?></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="lg:col-span-2 stitch pt-6">
+                            <h4 class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] mb-5" style="color:var(--ink-soft);">Additional Details</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="p-5 rounded-sm" style="background:rgba(47,74,60,0.07); border:1px solid rgba(47,74,60,0.15);">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-laptop-code" style="color:var(--forest);"></i>
+                                        <span class="font-type text-sm" style="color:var(--forest);">Skills</span>
+                                    </div>
+                                    <span class="font-mono text-sm leading-relaxed" style="color:var(--ink);"><?= $skills; ?></span>
+                                </div>
+
+                                <div class="p-5 rounded-sm" style="background:rgba(166,61,47,0.07); border:1px solid rgba(166,61,47,0.15);">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i class="fa-solid fa-gamepad" style="color:var(--stamp);"></i>
+                                        <span class="font-type text-sm" style="color:var(--stamp);">Hobbies</span>
+                                    </div>
+                                    <span class="font-mono text-sm leading-relaxed" style="color:var(--ink);"><?= $hobbies; ?></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="px-8 pb-6 font-mono text-xs stitch pt-4" style="color:var(--ink-soft);">
+                        Filed by Registrar &bull; <?= date('F j, Y'); ?>
+                    </div>
                 </div>
             </div>
         </div>
