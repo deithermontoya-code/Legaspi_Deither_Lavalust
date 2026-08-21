@@ -14,7 +14,7 @@ class StudentController extends Controller
             'name'           => 'Deither Legaspi',
             'course'         => 'BS Information Technology',
             'year'           => '3rd Year',
-            'section'        => 'A',
+            'section'        => '3f3',
             'email'          => 'deithermontoya@gmail.com',
             'contact_number' => '09454867344'
         ];
@@ -30,12 +30,12 @@ class StudentController extends Controller
             'name'           => 'Deither Legaspi',
             'course'         => 'BS Information Technology',
             'year'           => '3rd Year',
-            'section'        => 'A',
+            'section'        => '3f3',
             'email'          => 'deithermontoya@gmail.com',
             'address'        => 'Calapan City, Oriental Mindoro',
             'contact_number' => '09454867344',
-            'skills'         => 'Programming, Web Development, Database Management',
-            'hobbies'        => 'Coding, Gaming, Watching Movies'
+            'skills'         => 'Web Development',
+            'hobbies'        => 'Computer Gaming, Watching Movies'
         ];
 
         $this->call->view('student/profile', $data);
