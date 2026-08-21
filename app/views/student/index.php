@@ -7,131 +7,185 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Public+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap');
+
+        :root{
+            --kraft:#C7A574;
+            --kraft-dark:#9C7B4C;
+            --kraft-darker:#7C6039;
+            --card:#F1EAD6;
+            --ink:#2B2A25;
+            --ink-soft:#6B6250;
+            --stamp:#A63D2F;
+            --forest:#2F4A3C;
+        }
+        body{ font-family:'Public Sans', sans-serif; background:var(--kraft-darker); color:var(--ink); }
+        .font-type{ font-family:'Special Elite', monospace; }
+        .font-mono{ font-family:'Courier Prime', monospace; }
+
+        .cork-texture{
+            background-color: var(--kraft);
+            background-image:
+                radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 14px 14px;
+        }
+
+        /* Folder tab navigation */
+        .tab-btn{
+            position:relative;
+            clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+        }
+
+        /* Index card signature element */
+        .index-card{
+            background: var(--card);
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 27px,
+                rgba(43,42,37,0.08) 27px,
+                rgba(43,42,37,0.08) 28px
+            );
+            border: 1px solid rgba(43,42,37,0.15);
+            box-shadow: 0 18px 40px -20px rgba(0,0,0,0.5), 0 2px 0 rgba(255,255,255,0.4) inset;
+        }
+        .index-card::before{
+            /* red margin rule like a real index card */
+            content:"";
+            position:absolute;
+            top:0; bottom:0; left:56px;
+            width:1px;
+            background: rgba(166,61,47,0.35);
+        }
+
+        .stamp{
+            transform: rotate(-9deg);
+            border: 3px solid var(--stamp);
+            color: var(--stamp);
+            border-radius: 6px;
+            mix-blend-mode: multiply;
+            opacity: 0.85;
+        }
+
+        .paperclip{
+            position:absolute;
+            top:-18px;
+            left:28px;
+            width:34px;
+            height:64px;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
+        }
+
+        .stitch{
+            border-top: 2px dashed rgba(43,42,37,0.25);
+        }
     </style>
 </head>
-<body class="bg-zinc-50 flex h-screen overflow-hidden text-zinc-800">
+<body class="h-screen overflow-hidden flex flex-col">
+    <header class="flex-shrink-0 pt-5 px-8 cork-texture">
+        <div class="flex items-end justify-between">
+            <div class="flex items-end gap-1">
+                <div class="tab-btn font-type text-sm px-6 pt-3 pb-3" style="background:var(--forest); color:var(--card);">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i>LavaLust Registry
+                </div>
+                <a href="<?= site_url('student'); ?>" class="tab-btn font-type text-sm px-6 pt-3 pb-4 -mb-px" style="background:var(--card); color:var(--ink);">
+                    Students
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all" style="background:rgba(241,234,214,0.55); color:var(--ink-soft);">
+                    Add Student
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden md:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Reports
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden lg:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Transcripts
+                </a>
+                <a href="#" class="tab-btn font-type text-sm px-6 pt-3 pb-3 hover:pb-4 transition-all hidden lg:block" style="background:rgba(241,234,214,0.35); color:var(--ink-soft);">
+                    Settings
+                </a>
+            </div>
 
-    <aside class="w-64 bg-white border-r border-zinc-200 flex flex-col h-full flex-shrink-0 z-10 relative shadow-[1px_0_10px_rgba(0,0,0,0.02)]">
-        <div class="h-24 flex items-center px-8 border-b border-zinc-100">
-            <div class="bg-black text-white rounded-none p-2.5 mr-4 flex items-center justify-center">
-                <i class="fa-solid fa-graduation-cap text-lg"></i>
-            </div>
-            <div>
-                <h1 class="font-bold text-zinc-900 text-lg tracking-tight leading-tight">LavaLust</h1>
-                <p class="text-xs text-zinc-400 font-medium tracking-wide uppercase mt-0.5">JhonasGwapo</p>
-            </div>
-        </div>
-
-        <nav class="flex-1 overflow-y-auto py-8 px-4">
-            <div class="mb-8">
-                <p class="text-[10px] font-bold text-zinc-400 mb-4 px-4 tracking-[0.2em] uppercase">Main Menu</p>
-                <a href="<?= site_url('student'); ?>" class="flex items-center px-4 py-3 bg-zinc-50 text-black mb-1 font-semibold text-sm border-l-2 border-black">
-                    <i class="fa-solid fa-user-group w-5 mr-3 text-zinc-800"></i> Students
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors duration-200 mb-1 font-medium text-sm border-l-2 border-transparent">
-                    <i class="fa-solid fa-user-plus w-5 mr-3"></i> Add Student
-                </a>
-            </div>
-
-            <div>
-                <p class="text-[10px] font-bold text-zinc-400 mb-4 px-4 tracking-[0.2em] uppercase">Tools</p>
-                <a href="#" class="flex items-center px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors duration-200 mb-1 font-medium text-sm border-l-2 border-transparent">
-                    <i class="fa-solid fa-chart-bar w-5 mr-3"></i> Reports
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors duration-200 mb-1 font-medium text-sm border-l-2 border-transparent">
-                    <i class="fa-solid fa-file-lines w-5 mr-3"></i> Transcripts
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 transition-colors duration-200 mb-1 font-medium text-sm border-l-2 border-transparent">
-                    <i class="fa-solid fa-gear w-5 mr-3"></i> Settings
-                </a>
-            </div>
-        </nav>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#FAFAFA]">
-        
-        <header class="bg-white px-10 py-8 flex justify-between items-end flex-shrink-0 border-b border-zinc-200">
-            <div>
-                <h2 class="text-3xl font-bold text-zinc-900 tracking-tight">Student Management</h2>
-                <p class="text-zinc-500 text-sm mt-2 font-medium">Manage student profiles and academic information</p>
-            </div>
-            <button class="bg-black hover:bg-zinc-800 text-white px-5 py-2.5 text-sm font-medium flex items-center transition-all duration-300 shadow-sm rounded-none">
-                <i class="fa-solid fa-plus mr-2 text-xs"></i> Add Student
+            <button class="mb-3 font-semibold text-sm px-5 py-2.5 rounded-sm flex items-center gap-2 text-white" style="background:var(--stamp);">
+                <i class="fa-solid fa-plus text-xs"></i> New Enrolleed
             </button>
-        </header>
+        </div>
+    </header>
 
-        <div class="px-10 py-5 flex items-center gap-4 flex-shrink-0 border-b border-zinc-100 bg-white">
-            <div class="relative flex-1 max-w-xl">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-400 text-sm"></i>
-                <input type="text" placeholder="Search students by name or ID..." class="w-full bg-zinc-50 border border-zinc-200 rounded-none pl-11 pr-4 py-2.5 text-sm focus:border-black focus:ring-0 outline-none transition-colors placeholder:text-zinc-400">
-            </div>
-            
-            <div class="flex items-center gap-3 ml-auto">
-                <div class="relative">
-                    <select class="appearance-none bg-white border border-zinc-200 rounded-none pl-4 pr-10 py-2.5 text-sm text-zinc-700 outline-none cursor-pointer hover:border-zinc-300 transition-colors font-medium">
+    <main class="flex-1 overflow-y-auto cork-texture px-8 pb-10">
+        <div class="rounded-b-sm rounded-tr-sm p-8 min-h-full" style="background:var(--card); box-shadow:0 -2px 0 rgba(0,0,0,0.08) inset;">
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 stitch pt-6">
+                <div>
+                    <p class="font-mono text-xs tracking-widest uppercase" style="color:var(--stamp);">Registrar's File &bull; S.Y. 2025&ndash;2026</p>
+                    <h2 class="font-type text-2xl mt-1" style="color:var(--ink);">Student Dashboard</h2>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-xs" style="color:var(--ink-soft);"></i>
+                        <input type="text" placeholder="Search by name or ID&hellip;" class="bg-white/60 border pl-9 pr-3 py-2 text-sm rounded-sm outline-none w-56" style="border-color:rgba(43,42,37,0.2); color:var(--ink);">
+                    </div>
+                    <select class="bg-white/60 border px-3 py-2 text-sm rounded-sm outline-none" style="border-color:rgba(43,42,37,0.2); color:var(--ink);">
                         <option>All Grades</option>
                     </select>
-                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 text-[10px] pointer-events-none"></i>
-                </div>
-                
-                <div class="relative">
-                    <select class="appearance-none bg-white border border-zinc-200 rounded-none pl-4 pr-10 py-2.5 text-sm text-zinc-700 outline-none cursor-pointer hover:border-zinc-300 transition-colors font-medium">
+                    <select class="bg-white/60 border px-3 py-2 text-sm rounded-sm outline-none" style="border-color:rgba(43,42,37,0.2); color:var(--ink);">
                         <option>All Status</option>
                     </select>
-                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-zinc-400 text-[10px] pointer-events-none"></i>
-                </div>
-
-                <div class="flex border border-zinc-200 bg-zinc-50 ml-2 rounded-none p-0.5">
-                    <button class="bg-white text-black px-3 py-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-all"><i class="fa-solid fa-border-all w-4 h-4 text-center"></i></button>
-                    <button class="text-zinc-400 hover:text-zinc-800 px-3 py-1.5 transition-all"><i class="fa-solid fa-list w-4 h-4 text-center"></i></button>
                 </div>
             </div>
-        </div>
 
-        <div class="flex-1 overflow-y-auto p-10">
-            <div class="mb-8 flex items-center justify-between">
-                <span class="text-xs font-bold text-zinc-400 uppercase tracking-widest">Showing 1 of 1 students</span>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                
-                <div class="bg-white border border-zinc-200 p-7 hover:border-zinc-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 flex flex-col h-full rounded-none group">
-                    
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 bg-zinc-50 border border-zinc-100 flex items-center justify-center text-zinc-400 rounded-full group-hover:scale-105 transition-transform duration-300">
-                            <i class="fa-regular fa-user text-lg"></i>
+            <p class="font-mono text-xs uppercase tracking-widest mb-6" style="color:var(--ink-soft);">Showing 1 of 1 filed records</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="relative">
+
+                    <svg class="paperclip" viewBox="0 0 34 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 14V46C9 54.2843 15.7157 61 24 61C32.2843 61 39 54.2843 39 46V10C39 4.47715 34.5228 0 29 0C23.4772 0 19 4.47715 19 10V44C19 46.7614 21.2386 49 24 49C26.7614 49 29 46.7614 29 44V16"
+                              stroke="#8A8A8A" stroke-width="4" stroke-linecap="round" transform="translate(-6,0)"/>
+                        <path d="M9 14V46C9 54.2843 15.7157 61 24 61C32.2843 61 39 54.2843 39 46V10C39 4.47715 34.5228 0 29 0C23.4772 0 19 4.47715 19 10V44C19 46.7614 21.2386 49 24 49C26.7614 49 29 46.7614 29 44V16"
+                              stroke="#D6D6D6" stroke-width="2" stroke-linecap="round" transform="translate(-6,0)"/>
+                    </svg>
+
+                    <div class="index-card relative rounded-sm p-7 pt-9">
+
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="pl-8">
+                                <p class="font-mono text-[11px] uppercase tracking-[0.2em]" style="color:var(--stamp);">Student ID</p>
+                                <p class="font-mono text-lg font-bold" style="color:var(--ink);"><?= htmlspecialchars($student['student_id']); ?></p>
+                            </div>
+                            <div class="stamp font-type text-xs px-3 py-1 uppercase whitespace-nowrap">
+                                Enrolled
+                            </div>
                         </div>
-                        <span class="bg-zinc-900 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1">Active</span>
+
+                        <div class="pl-8 mb-6">
+                            <p class="font-type text-2xl leading-tight" style="color:var(--ink);"><?= htmlspecialchars($student['name']); ?></p>
+                            <p class="font-mono text-sm mt-1" style="color:var(--ink-soft);"><?= htmlspecialchars($student['course']); ?> &mdash; <?= htmlspecialchars($student['year']); ?>, Section <?= htmlspecialchars($student['section']); ?></p>
+                        </div>
+
+                        <div class="pl-8 space-y-2.5 font-mono text-sm">
+                            <p><span class="inline-block w-24" style="color:var(--ink-soft);">Email:</span> <?= htmlspecialchars($student['email']); ?></p>
+                            <p><span class="inline-block w-24" style="color:var(--ink-soft);">Contact No:</span> <?= htmlspecialchars($student['contact_number']); ?></p>
+                        </div>
+
+                        <div class="pl-8 mt-7 pt-5 stitch">
+                            <a href="<?= site_url('student/profile'); ?>" class="inline-flex items-center gap-2 font-semibold text-sm px-4 py-2 rounded-sm text-white" style="background:var(--forest);">
+                                Open the profile <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
                     </div>
-                    
-                    <div class="mb-5">
-                        <h3 class="font-bold text-zinc-900 text-xl tracking-tight truncate mb-1">
-                            <?= htmlspecialchars($student['name']); ?>
-                        </h3>
-                        <p class="text-sm text-zinc-500 font-medium"><?= htmlspecialchars($student['course']); ?> &bull; <?= htmlspecialchars($student['year']); ?></p>
+                </div>
+                <div class="index-card relative rounded-sm p-7 flex flex-col justify-between">
+                    <div>
+                        <p class="font-mono text-[11px] uppercase tracking-[0.2em] mb-4" style="color:var(--stamp);">Filing Note</p>
+                        <p class="font-type text-sm leading-7" style="color:var(--ink);">
+                            This folder currently holds one active record. New enrollees are filed
+                            alphabetically and cross-referenced by course and section for the current
+                            school year.
+                        </p>
                     </div>
-                    
-                    <div class="space-y-3 mb-6 flex-1">
-                        <div class="flex items-center text-sm text-zinc-600">
-                            <i class="fa-solid fa-fingerprint w-5 text-zinc-300"></i>
-                            <span class="font-medium tracking-wide"><?= htmlspecialchars($student['student_id']); ?></span>
-                        </div>
-                        <div class="flex items-center text-sm text-zinc-600">
-                            <i class="fa-regular fa-envelope w-5 text-zinc-300"></i>
-                            <span class="truncate"><?= htmlspecialchars($student['email']); ?></span>
-                        </div>
-                        <div class="flex items-center text-sm text-zinc-600">
-                            <i class="fa-solid fa-layer-group w-5 text-zinc-300"></i>
-                            <span>Section <?= htmlspecialchars($student['section']); ?></span>
-                        </div>
-                    </div>
-                    
-                    <div class="pt-5 border-t border-zinc-100 mt-auto">
-                        <a href="<?= site_url('student/profile'); ?>" class="block w-full text-center border border-zinc-200 text-zinc-700 hover:bg-black hover:text-white hover:border-black font-semibold py-2.5 px-4 text-sm transition-colors duration-300 rounded-none">
-                            View Profile
-                        </a>
+                    <div class="stitch pt-4 mt-6 font-mono text-xs" style="color:var(--ink-soft);">
+                        Last updated by Registrar &bull; <?= date('F j, Y'); ?>
                     </div>
                 </div>
 
