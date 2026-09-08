@@ -8,70 +8,45 @@ $is_admin = (($_SESSION['role'] ?? null) === 'admin');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Product Manager</title>
+    <title>Products | Product Desk</title>
     <style>
+        :root { --ink: #12212b; --muted: #6d7b83; --cream: #f6f1e8; --paper: #fffdf8; --teal: #0f766e; --orange: #e8793e; --line: #d9e0dc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f7fb 0%, #e8edf5 100%);
-            color: #1f2937;
-            min-height: 100vh;
-            padding: 2.5rem 1.5rem;
-        }
-        .wrap { max-width: 1000px; margin: 0 auto; }
-        .topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        h1 { font-size: 1.6rem; }
-        .actions { display: flex; gap: .6rem; align-items: center; }
-        .btn {
-            display: inline-block;
-            padding: .55rem 1rem;
-            border-radius: 8px;
-            font-size: .85rem;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary { background: #2563eb; color: #fff; }
-        .btn-primary:hover { background: #1d4ed8; }
-        .btn-muted { background: #e5e7eb; color: #1f2937; }
-        .btn-muted:hover { background: #d1d5db; }
-        .btn-danger { background: #dc2626; color: #fff; }
-        .btn-danger:hover { background: #b91c1c; }
-        .btn-sm { padding: .4rem .75rem; font-size: .8rem; }
-        .msg { padding: .7rem .9rem; border-radius: 8px; font-size: .85rem; margin-bottom: 1.25rem; }
-        .msg.success { background: #dcfce7; color: #166534; }
-        .msg.error { background: #fee2e2; color: #991b1b; }
-        .panel {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            overflow: hidden;
-        }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: .85rem 1.1rem; text-align: left; font-size: .9rem; }
-        th { background: #2563eb; color: #fff; font-weight: 600; }
-        tbody tr:nth-child(even) { background: #f8fafc; }
-        tbody tr:hover { background: #eef2ff; }
-        td { border-bottom: 1px solid #f1f5f9; }
-        td.desc { max-width: 260px; color: #4b5563; }
+        body { min-height: 100vh; padding: 34px; background: var(--cream); color: var(--ink); font: 16px/1.5 Georgia, serif; }
+        .wrap { max-width: 1280px; margin: 0 auto; }
+        .topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+        .eyebrow { margin-bottom: 8px; color: var(--orange); font: 700 .72rem Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+        h1 { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: .88; font-weight: 400; }
+        .actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+        .btn { display: inline-block; padding: 13px 17px; border: 1px solid transparent; color: var(--ink); font: 700 .76rem Arial, sans-serif; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+        .btn-primary { background: var(--orange); color: #fff; }
+        .btn-primary:hover { background: #cf6030; }
+        .btn-muted { border-color: var(--line); background: var(--paper); }
+        .btn-danger { padding: 0; border: 0; background: transparent; color: #b42318; }
+        .btn-sm { padding: 7px 10px; font-size: .7rem; }
+        .user { color: var(--muted); font: .8rem Arial, sans-serif; }
+        .user strong { color: var(--ink); }
+        .msg { padding: 13px 16px; margin: 24px 0; border-left: 3px solid; font: .85rem Arial, sans-serif; }
+        .msg.success { border-color: #198754; background: #e8f5ed; color: #14532d; }
+        .msg.error { border-color: #b42318; background: #fff0ed; color: #8a1c13; }
+        .panel { margin-top: 26px; overflow-x: auto; border-top: 3px solid var(--teal); background: var(--paper); box-shadow: 0 18px 45px rgba(25, 48, 45, .08); }
+        table { width: 100%; border-collapse: collapse; min-width: 780px; }
+        th, td { padding: 18px 20px; text-align: left; font-size: .88rem; }
+        th { color: var(--muted); border-bottom: 1px solid var(--line); font: 700 .7rem Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+        td { border-bottom: 1px solid #e8ede9; }
+        tbody tr:hover { background: #f4f8f4; }
+        td.desc { max-width: 280px; color: var(--muted); }
         td.numeric { text-align: right; white-space: nowrap; }
-        .row-actions { display: flex; gap: .5rem; }
-        .empty { padding: 2rem; text-align: center; color: #6b7280; }
+        .row-actions { display: flex; gap: 12px; align-items: center; }
+        .empty { padding: 58px 20px; text-align: center; color: var(--muted); }
         form.inline { display: inline; }
+        @media (max-width: 760px) { body { padding: 20px 15px; } .topbar { align-items: flex-start; flex-direction: column; } .actions { justify-content: flex-start; } h1 { font-size: 3.4rem; } }
     </style>
 </head>
 <body>
 <div class="wrap">
     <div class="topbar">
-        <h1>Products</h1>
+        <div><p class="eyebrow">Product Desk / Inventory</p><h1>Products</h1></div>
         <div class="actions">
             <span style="font-size:.85rem;color:#6b7280;">
                 Signed in as <strong><?= htmlspecialchars($_SESSION['username'] ?? ''); ?></strong>
