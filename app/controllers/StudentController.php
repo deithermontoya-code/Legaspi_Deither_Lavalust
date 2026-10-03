@@ -11,7 +11,7 @@ class StudentController extends Controller
 
         $student = [
             'student_id'     => '2026-0001',
-            'name'           => 'Deither Legaspi',
+            'name'           => 'Deither',
             'course'         => 'BS Information Technology',
             'year'           => '3rd Year',
             'section'        => '3f3',
