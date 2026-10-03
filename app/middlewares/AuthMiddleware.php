@@ -25,8 +25,6 @@ class AuthMiddleware
         $is_logged_in = isset($_SESSION['user_id']);
 
         if (!$is_logged_in) {
-            // Remember where the user was headed so we can send them
-            // back there after a successful login.
             $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'] ?? '/products';
             redirect('login?denied=1');
             return;

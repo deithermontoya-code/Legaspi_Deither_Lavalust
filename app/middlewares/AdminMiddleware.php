@@ -1,15 +1,6 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
-/**
- * AdminMiddleware
- *
- * Runs after AuthMiddleware. Restricts routes to users whose
- * session role is 'admin'. Logged-in non-admin users (role
- * 'user' or 'moderator') are bounced back to the product list
- * with a message instead of a login redirect, since they are
- * already authenticated - they just lack permission.
- */
 class AdminMiddleware
 {
     /**
